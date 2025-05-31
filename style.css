@@ -1,0 +1,251 @@
+/* ========================
+   VARIABLES DE COLOR
+   ======================== */
+   :root {
+    --vino: #822f3d;
+    --mostaza: #dfa312;
+    --verde: #4c8a4c;
+    --celeste: #4a90a4;
+    --fondo-semitransp: rgba(255, 255, 255, 0.85); /* blanco con opacidad para legibilidad */
+    --gris-claro-semitransp: rgba(250, 245, 239, 0.85);
+    --texto: #333333;
+    /* Paleta pastel para las letras */
+    --pastel-1: #F9D5E5;
+    --pastel-2: #C1E1C1;
+    --pastel-3: #FBEEC1;
+    --pastel-4: #AED9E0;
+    --pastel-5: #F3D1BF;
+    --pastel-6: #D3C0EB;
+  }
+  
+  /* ========================
+     RESET BÁSICO
+     ======================== */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    height: 100%;
+    overflow: hidden; /* evitamos scroll del body, el scroll va en .container */
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  /* ========================
+     FONDO GENERAL
+     ======================== */
+  body {
+    background: url('fondo.png') no-repeat center center fixed;
+    background-size: cover;
+  }
+  
+  /* ========================
+     CONTENEDOR PRINCIPAL
+     ======================== */
+  .container {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    height: 100vh;
+  }
+  
+  /* ========================
+     SECCIONES
+     ======================== */
+  .section {
+    scroll-snap-align: start;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    position: relative;
+  
+    /* Para que el fondo general se vea detrás, hacemos que cada sección sea semitransparente */
+    background-color: var(--fondo-semitransp);
+  
+    /* Animación de aparición */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+  
+  /* Cuando la sección entra en pantalla, se le añade la clase .visible (desde script.js) */
+  .section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* ========================
+     TIPOGRAFÍA Y ESTILOS DE TEXTO
+     ======================== */
+  h1.rainbow-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+  
+  /* Cada letra dentro de <h1> es un <span>, para colorearla y darle efecto hover */
+  h1.rainbow-text span {
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+  
+  h1.rainbow-text span:hover {
+    transform: translateY(-5px);
+  }
+  
+  /* Subtítulo “1 añito” */
+  h2.anim-subheader {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--vino);
+    margin-top: 0.5rem;
+  }
+  
+  /* Título de la segunda sección */
+  h3.anim-header {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--celeste);
+  }
+  
+  /* Texto secundario en sección evento */
+  .evento .dia.anim-text {
+    color: var(--mostaza);
+    font-size: 1.5rem;
+    margin-bottom: 0.3rem;
+    font-weight: 500;
+  }
+  
+  .evento .fecha.anim-text {
+    color: var(--mostaza);
+    font-size: 2.8rem;
+    margin-bottom: 0.3rem;
+  }
+  
+  .evento .hora.anim-text {
+    color: var(--vino);
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+  
+  /* ========================
+     IMAGEN DE ANIMALES
+     ======================== */
+  .anim-image-wrapper {
+    width: 250px;
+    height: auto;
+    margin-top: 1.5rem;
+  }
+  
+  .float-img {
+    width: 100%;
+    display: block;
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  /* ========================
+     BOTONES
+     ======================== */
+  .btn {
+    display: inline-block;
+    background-color: var(--mostaza);
+    color: white;
+    padding: 1rem 2rem;
+    margin: 0.8rem;
+    border-radius: 1.5rem;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    background-color: var(--verde);
+  }
+  
+  /* ========================
+     SCROLLBAR PERSONALIZADA (opcional)
+     ======================== */
+  .container::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .container::-webkit-scrollbar-thumb {
+    background-color: rgba(130, 47, 61, 0.4);
+    border-radius: 4px;
+  }
+  
+  /* ========================
+     MEDIA QUERIES (pantallas pequeñas)
+     ======================== */
+  /* Responsive: tablets */
+@media (max-width: 768px) {
+  .section {
+    padding: 1.5rem;
+  }
+  h1.rainbow-text {
+    font-size: 2.5rem;
+  }
+  h2.anim-subheader {
+    font-size: 1.6rem;
+  }
+  h3.anim-header {
+    font-size: 2rem;
+  }
+  .anim-image-wrapper {
+    width: 60%;
+  }
+  .btn {
+    padding: 0.9rem 1.8rem;
+    font-size: 1rem;
+  }
+}
+
+/* Responsive: móviles (reemplaza el bloque anterior) */
+@media (max-width: 480px) {
+  h1.rainbow-text {
+    font-size: 2.2rem;
+    letter-spacing: 1px;
+  }
+  h2.anim-subheader {
+    font-size: 1.5rem;
+  }
+  h3.anim-header {
+    font-size: 1.8rem;
+  }
+  .evento .fecha.anim-text {
+    font-size: 2.2rem;
+  }
+  .anim-image-wrapper {
+    width: 80%;
+  }
+  .btn {
+    padding: 0.8rem 1rem;
+    font-size: 0.95rem;
+    width: 80%;
+    margin: 0.6rem auto;
+  }
+}
