@@ -43,9 +43,16 @@ document.addEventListener('DOMContentLoaded', () => {
           span.textContent = caracter;
           // Asignamos un color pastel ciclando en el array
           span.style.color = paletaPastel[i % paletaPastel.length];
+          const popDelay = i * 0.1;
+          const danceDuration = (1 + Math.random()).toFixed(2); // 1–2s aleatorios
+          const danceDelay = (popDelay + 0.6).toFixed(2);
+          // animación de entrada escalonada
+          // primera aparición con pop, luego rebote infinito
+          span.style.animation = 
+            `letter-pop 0.6s ease forwards ${popDelay}s, ` +
+            `letter-dance ${danceDuration}s ease-in-out ${danceDelay}s infinite alternate`;
         }
         el.appendChild(span);
       });
     });
   });
-  

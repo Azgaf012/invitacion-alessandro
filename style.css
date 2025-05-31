@@ -84,16 +84,18 @@
      ======================== */
   h1.rainbow-text {
     font-family: 'Playfair Display', serif;
-    font-size: 3rem;
+    font-size: 4rem;
     letter-spacing: 2px;
     text-transform: uppercase;
     line-height: 1.2;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
   }
   
   /* Cada letra dentro de <h1> es un <span>, para colorearla y darle efecto hover */
   h1.rainbow-text span {
     display: inline-block;
     transition: transform 0.3s ease;
+    opacity: 0; /* Asegurar spans invisibles antes de animar */
   }
   
   h1.rainbow-text span:hover {
@@ -248,4 +250,124 @@
     width: 80%;
     margin: 0.6rem auto;
   }
+}
+
+/* ========================
+   NUEVA SECCIÓN COMBINADA
+   ======================== */
+  .section.invitacion-info {
+    /* glass-style container */
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    padding: 3rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  
+    /* sutil crecimiento/reducción continuo */
+    animation: container-pulse 6s ease-in-out infinite;
+  }
+  
+  .section.invitacion-info .anim-header {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--vino);
+    letter-spacing: 3px;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+  .section.invitacion-info .anim-header::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--mostaza);
+    margin: 0.75rem auto 0;
+    border-radius: 2px;
+  }
+  
+  .section.invitacion-info .evento-info {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+  }
+  .section.invitacion-info .evento-info p {
+    margin: 0;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--texto);
+  
+    /* salto alternado */
+    animation: jump 2s ease-in-out infinite alternate;
+  }
+  .section.invitacion-info .dia.anim-text   { animation-delay: 0s; }
+  .section.invitacion-info .fecha.anim-text { animation-delay: 0.3s; }
+  .section.invitacion-info .hora.anim-text  { animation-delay: 0.6s; }
+  
+  .section.invitacion-info .fecha.anim-text {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--celeste);
+  }
+  
+  .section.invitacion-info .botones-group {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .section.invitacion-info {
+      padding: 2rem;
+    }
+    .section.invitacion-info .anim-header {
+      font-size: 2.2rem;
+    }
+    .section.invitacion-info .evento-info {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  }
+
+/* Keyframes para animación de letras */
+@keyframes letter-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) translateY(20px);
+  }
+  60% {
+    transform: scale(1.2) translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+@keyframes letter-bounce {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-5px); }
+}
+@keyframes letter-dance {
+  0%   { transform: translateY(0)    rotate(0deg); }
+  20%  { transform: translateY(-5px) rotate(-5deg); }
+  40%  { transform: translateY(0)    rotate(5deg);  }
+  60%  { transform: translateY(5px)  rotate(-5deg); }
+  80%  { transform: translateY(0)    rotate(5deg);  }
+  100% { transform: translateY(0)    rotate(0deg);  }
+}
+@keyframes container-pulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.02); }
+}
+@keyframes jump {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-8px); }
+}
+@keyframes pulse-btn {
+  0%, 100% { transform: scale(1);  box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+  50%       { transform: scale(1.05); box-shadow: 0 6px 12px rgba(0,0,0,0.2); }
 }
