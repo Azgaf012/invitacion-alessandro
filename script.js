@@ -37,18 +37,23 @@ document.addEventListener('DOMContentLoaded', () => {
       textoOriginal.split('').forEach((caracter, i) => {
         const span = document.createElement('span');
         if (caracter === ' ') {
-          // Para los espacios, simplemente hacemos un span con &nbsp;
+          // Para los espacios, insertamos un &nbsp;
           span.innerHTML = '&nbsp;';
+          // Para los espacios no aplicamos animación de letra
+          span.style.opacity = 1;
         } else {
           span.textContent = caracter;
           // Asignamos un color pastel ciclando en el array
           span.style.color = paletaPastel[i % paletaPastel.length];
-          const popDelay = i * 0.1;
-          const danceDuration = (1 + Math.random()).toFixed(2); // 1–2s aleatorios
+  
+          // Animación de aparición escalonada (“pop”)
+          const popDelay = i * 0.1; // cada letra con 0.1s de diferencia
+          // Duración aleatoria del “dance” entre 1.2s y 2s
+          const danceDuration = (1.2 + Math.random() * 0.8).toFixed(2);
+          // Delay de dance para que empiece un poco después del pop
           const danceDelay = (popDelay + 0.6).toFixed(2);
-          // animación de entrada escalonada
-          // primera aparición con pop, luego rebote infinito
-          span.style.animation = 
+  
+          span.style.animation =
             `letter-pop 0.6s ease forwards ${popDelay}s, ` +
             `letter-dance ${danceDuration}s ease-in-out ${danceDelay}s infinite alternate`;
         }
@@ -56,3 +61,4 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   });
+  
